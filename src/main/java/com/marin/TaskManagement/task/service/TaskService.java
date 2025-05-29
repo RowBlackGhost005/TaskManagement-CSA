@@ -3,7 +3,6 @@ package com.marin.TaskManagement.task.service;
 import com.marin.TaskManagement.common.dto.TaskDTO;
 import com.marin.TaskManagement.common.dto.TaskRegisterDTO;
 import com.marin.TaskManagement.common.entity.Task;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

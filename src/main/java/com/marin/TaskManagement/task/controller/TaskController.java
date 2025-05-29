@@ -3,14 +3,11 @@ package com.marin.TaskManagement.task.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.marin.TaskManagement.common.dto.TaskDTO;
 import com.marin.TaskManagement.common.dto.TaskRegisterDTO;
-import com.marin.TaskManagement.common.dto.UserDTO;
 import com.marin.TaskManagement.common.entity.Task;
-import com.marin.TaskManagement.common.entity.User;
 import com.marin.TaskManagement.task.service.TaskService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.List;
 

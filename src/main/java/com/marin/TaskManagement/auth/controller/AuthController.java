@@ -29,7 +29,7 @@ public class AuthController {
         try{
             User user = userService.registerUser(userAuth);
 
-            return ResponseEntity.ok("User registered successfully");
+            return ResponseEntity.ok("Created user "+ user.getUsername() + " successfully");
 
         }catch(DataIntegrityViolationException ex){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Username already taken");
