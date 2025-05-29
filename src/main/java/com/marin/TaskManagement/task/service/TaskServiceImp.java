@@ -8,6 +8,7 @@ import com.marin.TaskManagement.common.entity.Priority;
 import com.marin.TaskManagement.common.entity.Status;
 import com.marin.TaskManagement.common.entity.Task;
 import com.marin.TaskManagement.common.entity.User;
+import com.marin.TaskManagement.common.exception.NoTaskFoundException;
 import com.marin.TaskManagement.task.repository.TaskRepository;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
@@ -38,7 +39,7 @@ public class TaskServiceImp implements TaskService{
 
 
     @Override
-    public Task createTask(TaskRegisterDTO registerTask) throws Exception {
+    public Task createTask(TaskRegisterDTO registerTask) {
         Task taskDB = new Task();
 
         int authUserId = jwtService.extractAuthUserId(((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest());
@@ -65,11 +66,11 @@ public class TaskServiceImp implements TaskService{
 
     @Override
     @Transactional
-    public Task updateTask(int id, TaskRegisterDTO taskRegister) {
+    public Task updateTask(int id, TaskRegisterDTO taskRegister) throws NoTaskFoundException {
 
         int authUserId = jwtService.extractAuthUserId(((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest());
 
-        Task taskDB = taskRepository.fetchTaskByIdUserId(id , authUserId).orElseThrow();
+        Task taskDB = taskRepository.fetchTaskByIdUserId(id , authUserId).orElseThrow( () -> new NoTaskFoundException("No task found with such ID"));
 
         if(taskRegister.title() != null){
             taskDB.setTitle(taskRegister.title());

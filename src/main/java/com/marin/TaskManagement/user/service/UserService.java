@@ -4,6 +4,7 @@ import com.marin.TaskManagement.common.dto.UserAuthDTO;
 import com.marin.TaskManagement.common.dto.UserDTO;
 import com.marin.TaskManagement.common.dto.UserTaskCountDTO;
 import com.marin.TaskManagement.common.entity.User;
+import com.marin.TaskManagement.common.exception.NoRoleFoundException;
 import com.marin.TaskManagement.common.exception.NoUserFoundException;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  */
 public interface UserService {
 
-    User registerUser(UserAuthDTO userAuth);
+    User registerUser(UserAuthDTO userAuth) throws NoRoleFoundException;
 
     User fetchUserByUsername(String username) throws NoUserFoundException;
 
