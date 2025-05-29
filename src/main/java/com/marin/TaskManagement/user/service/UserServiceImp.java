@@ -5,6 +5,7 @@ import com.marin.TaskManagement.common.dto.UserDTO;
 import com.marin.TaskManagement.common.dto.UserTaskCountDTO;
 import com.marin.TaskManagement.common.entity.Role;
 import com.marin.TaskManagement.common.entity.User;
+import com.marin.TaskManagement.common.exception.NoRoleFoundException;
 import com.marin.TaskManagement.common.exception.NoUserFoundException;
 import com.marin.TaskManagement.user.repository.RoleRepository;
 import com.marin.TaskManagement.user.repository.UserRepository;
@@ -37,12 +38,12 @@ public class UserServiceImp implements UserService{
 
 
     @Override
-    public User registerUser(UserAuthDTO userAuth) {
+    public User registerUser(UserAuthDTO userAuth) throws NoRoleFoundException {
         User user = new User();
         user.setUsername(userAuth.username());
         user.setPassword(passwordEncoder.encode(userAuth.password()));
 
-        Role userRole = roleRepository.findByName(defaultRole).orElseThrow();
+        Role userRole = roleRepository.findByName(defaultRole).orElseThrow(() -> new NoRoleFoundException("The default role cannot be found"));
 
         user.getRoles().add(userRole);
 
@@ -55,8 +56,8 @@ public class UserServiceImp implements UserService{
     }
 
     @Override
-    public UserDTO fetchUserById(int id) throws Exception {
-        return userRepository.findUserById(id).orElseThrow( () -> new Exception("Not found"));
+    public UserDTO fetchUserById(int id) throws NoUserFoundException {
+        return userRepository.findUserById(id).orElseThrow( () -> new NoUserFoundException("No user found with such ID"));
     }
 
     @Override

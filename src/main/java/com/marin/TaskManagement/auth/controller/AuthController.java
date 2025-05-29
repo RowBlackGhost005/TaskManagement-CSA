@@ -3,6 +3,7 @@ package com.marin.TaskManagement.auth.controller;
 import com.marin.TaskManagement.common.dto.LoginResponseDTO;
 import com.marin.TaskManagement.common.dto.UserAuthDTO;
 import com.marin.TaskManagement.common.entity.User;
+import com.marin.TaskManagement.common.exception.NoRoleFoundException;
 import com.marin.TaskManagement.common.exception.NoUserFoundException;
 import com.marin.TaskManagement.auth.service.AuthService;
 import com.marin.TaskManagement.user.service.UserService;
@@ -25,7 +26,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerRequest(@RequestBody UserAuthDTO userAuth){
+    public ResponseEntity<String> registerRequest(@RequestBody UserAuthDTO userAuth) throws NoRoleFoundException {
         try{
             User user = userService.registerUser(userAuth);
 

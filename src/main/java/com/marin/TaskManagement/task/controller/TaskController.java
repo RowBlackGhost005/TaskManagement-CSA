@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.marin.TaskManagement.common.dto.TaskDTO;
 import com.marin.TaskManagement.common.dto.TaskRegisterDTO;
 import com.marin.TaskManagement.common.entity.Task;
+import com.marin.TaskManagement.common.exception.NoTaskFoundException;
 import com.marin.TaskManagement.task.service.TaskService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -39,7 +40,7 @@ public class TaskController {
 
     @PutMapping("/{taskId}")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<Task> updateTask(@PathVariable int taskId , @RequestBody TaskRegisterDTO taskRegisterDTO){
+    public ResponseEntity<Task> updateTask(@PathVariable int taskId , @RequestBody TaskRegisterDTO taskRegisterDTO) throws NoTaskFoundException {
         Task updatedTask = taskService.updateTask(taskId , taskRegisterDTO);
 
         return ResponseEntity.ok(updatedTask);
