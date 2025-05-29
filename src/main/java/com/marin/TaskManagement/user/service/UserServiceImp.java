@@ -2,6 +2,8 @@ package com.marin.TaskManagement.user.service;
 
 import com.marin.TaskManagement.common.dto.UserAuthDTO;
 import com.marin.TaskManagement.common.dto.UserDTO;
+import com.marin.TaskManagement.common.dto.UserTaskCountDTO;
+import com.marin.TaskManagement.common.dto.UserTasksDTO;
 import com.marin.TaskManagement.common.entity.Role;
 import com.marin.TaskManagement.common.entity.User;
 import com.marin.TaskManagement.common.exception.NoUserFoundException;
@@ -10,6 +12,8 @@ import com.marin.TaskManagement.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Implementation of UserService for managing operation related to Users
@@ -54,5 +58,10 @@ public class UserServiceImp implements UserService{
     @Override
     public UserDTO fetchUserById(int id) throws Exception {
         return userRepository.findUserById(id).orElseThrow( () -> new Exception("Not found"));
+    }
+
+    @Override
+    public List<UserTaskCountDTO> fetchUsersTaskCount() {
+        return userRepository.fetchUsersTaskCount().orElseThrow();
     }
 }

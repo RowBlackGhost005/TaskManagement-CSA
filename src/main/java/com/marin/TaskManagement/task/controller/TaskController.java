@@ -1,11 +1,16 @@
 package com.marin.TaskManagement.task.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.marin.TaskManagement.common.dto.TaskDTO;
 import com.marin.TaskManagement.common.dto.TaskRegisterDTO;
+import com.marin.TaskManagement.common.dto.UserDTO;
 import com.marin.TaskManagement.common.entity.Task;
+import com.marin.TaskManagement.common.entity.User;
 import com.marin.TaskManagement.task.service.TaskService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.List;
 
@@ -50,5 +55,28 @@ public class TaskController {
         taskService.deleteTask(taskId);
 
         return ResponseEntity.ok("Deleted successfully");
+    }
+
+    @GetMapping("/admin/list")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<Task>> showAllTasks(){
+        List<Task> tasks = taskService.getAllTasks();
+
+        return ResponseEntity.ok(tasks);
+    }
+
+    @GetMapping("/admin/task/{taskId}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<TaskDTO> getTaskById(@PathVariable int taskId) throws JsonProcessingException {
+        TaskDTO task = taskService.getTaskById(taskId);
+
+        return ResponseEntity.ok(task);
+    }
+
+    @DeleteMapping("/admin/task/{taskId}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<String> deleteTaskById(@PathVariable int taskId){
+        taskService.deleteTaskAdmin(taskId);
+        return ResponseEntity.ok("Task deleted");
     }
 }
