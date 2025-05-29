@@ -2,6 +2,7 @@ package com.marin.TaskManagement.task.service;
 
 import com.marin.TaskManagement.auth.service.JwtService;
 import com.marin.TaskManagement.common.dto.TaskDTO;
+import com.marin.TaskManagement.common.dto.TaskInfoDTO;
 import com.marin.TaskManagement.common.dto.TaskRegisterDTO;
 import com.marin.TaskManagement.common.dto.UserDTO;
 import com.marin.TaskManagement.common.entity.Priority;
@@ -39,7 +40,7 @@ public class TaskServiceImp implements TaskService{
 
 
     @Override
-    public Task createTask(TaskRegisterDTO registerTask) {
+    public TaskInfoDTO createTask(TaskRegisterDTO registerTask) {
         Task taskDB = new Task();
 
         int authUserId = jwtService.extractAuthUserId(((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest());
@@ -53,20 +54,22 @@ public class TaskServiceImp implements TaskService{
         taskDB.setPriority((registerTask.priority() != null) ? registerTask.priority() : Priority.LOW);
         taskDB.setDueDate(registerTask.dueDate());
 
-        return taskRepository.save(taskDB);
+        taskDB = taskRepository.save(taskDB);
+        return taskToTaskInfo(taskDB);
     }
 
     @Override
-    public List<Task> getAuthUserTasks() {
+    public List<TaskInfoDTO> getAuthUserTasks() {
 
         int authUserId = jwtService.extractAuthUserId(((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest());
 
-        return taskRepository.fetchTaskByUserId(authUserId).orElse(new ArrayList<>());
+
+        return taskRepository.fetchTasksByUserId(authUserId).orElse(new ArrayList<>());
     }
 
     @Override
     @Transactional
-    public Task updateTask(int id, TaskRegisterDTO taskRegister) throws NoTaskFoundException {
+    public TaskInfoDTO updateTask(int id, TaskRegisterDTO taskRegister) throws NoTaskFoundException {
 
         int authUserId = jwtService.extractAuthUserId(((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest());
 
@@ -92,7 +95,9 @@ public class TaskServiceImp implements TaskService{
             taskDB.setDueDate(taskRegister.dueDate());
         }
 
-        return taskRepository.save(taskDB);
+        taskDB = taskRepository.save(taskDB);
+
+        return taskToTaskInfo(taskDB);
     }
 
     @Override
@@ -105,9 +110,9 @@ public class TaskServiceImp implements TaskService{
     }
 
     @Override
-    public List<Task> getAllTasks() {
+    public List<TaskDTO> getAllTasks() {
         logger.info("Accessed all tasks by: {}",getAuthUser());
-        return taskRepository.findAll();
+        return taskRepository.fetchAllTasks().orElseThrow();
     }
 
     @Override
@@ -128,5 +133,9 @@ public class TaskServiceImp implements TaskService{
 
     private String getAuthUser(){
         return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
+    private TaskInfoDTO taskToTaskInfo(Task task){
+        return new TaskInfoDTO(task.getId() , task.getTitle() , task.getDescription() , task.getStatus() , task.getPriority() , task.getDueDate());
     }
 }
