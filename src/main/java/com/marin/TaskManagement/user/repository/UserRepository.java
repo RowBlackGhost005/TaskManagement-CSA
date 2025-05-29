@@ -2,9 +2,6 @@ package com.marin.TaskManagement.user.repository;
 
 import com.marin.TaskManagement.common.dto.UserDTO;
 import com.marin.TaskManagement.common.dto.UserTaskCountDTO;
-import com.marin.TaskManagement.common.dto.UserTasksDTO;
-import com.marin.TaskManagement.common.entity.Priority;
-import com.marin.TaskManagement.common.entity.Status;
 import com.marin.TaskManagement.common.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
