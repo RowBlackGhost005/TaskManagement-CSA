@@ -10,8 +10,10 @@ import com.marin.TaskManagement.common.entity.Task;
 import com.marin.TaskManagement.common.entity.User;
 import com.marin.TaskManagement.task.repository.TaskRepository;
 import jakarta.transaction.Transactional;
-import org.hibernate.Hibernate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -25,6 +27,8 @@ public class TaskServiceImp implements TaskService{
     private final TaskRepository taskRepository;
 
     private final JwtService jwtService;
+
+    private static final Logger logger = LoggerFactory.getLogger(TaskServiceImp.class);
 
     @Autowired
     public TaskServiceImp(TaskRepository taskRepository, JwtService jwtService) {
@@ -101,6 +105,7 @@ public class TaskServiceImp implements TaskService{
 
     @Override
     public List<Task> getAllTasks() {
+        logger.info("Accessed all tasks by: {}",getAuthUser());
         return taskRepository.findAll();
     }
 
@@ -116,6 +121,11 @@ public class TaskServiceImp implements TaskService{
 
     @Override
     public void deleteTaskAdmin(int id) {
+        logger.info("Deleting Task with ID: {} By: {}", id , getAuthUser());
         taskRepository.deleteById(id);
+    }
+
+    private String getAuthUser(){
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 }
