@@ -1,4 +1,4 @@
-package com.marin.TaskManagement.exception;
+package com.marin.TaskManagement.common.exception;
 
 public class NoUserFoundException extends Exception{
 

@@ -1,11 +1,11 @@
-package com.marin.TaskManagement.controller;
+package com.marin.TaskManagement.auth.controller;
 
-import com.marin.TaskManagement.dto.LoginResponseDTO;
-import com.marin.TaskManagement.dto.UserAuthDTO;
-import com.marin.TaskManagement.entity.User;
-import com.marin.TaskManagement.exception.NoUserFoundException;
-import com.marin.TaskManagement.service.AuthService;
-import com.marin.TaskManagement.service.UserService;
+import com.marin.TaskManagement.common.dto.LoginResponseDTO;
+import com.marin.TaskManagement.common.dto.UserAuthDTO;
+import com.marin.TaskManagement.common.entity.User;
+import com.marin.TaskManagement.common.exception.NoUserFoundException;
+import com.marin.TaskManagement.auth.service.AuthService;
+import com.marin.TaskManagement.user.service.UserService;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
