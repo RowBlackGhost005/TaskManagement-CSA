@@ -1,6 +1,7 @@
 package com.marin.TaskManagement.task.service;
 
 import com.marin.TaskManagement.common.dto.TaskDTO;
+import com.marin.TaskManagement.common.dto.TaskInfoDTO;
 import com.marin.TaskManagement.common.dto.TaskRegisterDTO;
 import com.marin.TaskManagement.common.entity.Task;
 import com.marin.TaskManagement.common.exception.NoTaskFoundException;
@@ -9,15 +10,15 @@ import java.util.List;
 
 public interface TaskService {
 
-    Task createTask(TaskRegisterDTO registerTask);
+    TaskInfoDTO createTask(TaskRegisterDTO registerTask);
 
-    List<Task> getAuthUserTasks();
+    List<TaskInfoDTO> getAuthUserTasks();
 
-    Task updateTask(int id , TaskRegisterDTO taskRegister) throws NoTaskFoundException;
+    TaskInfoDTO updateTask(int id , TaskRegisterDTO taskRegister) throws NoTaskFoundException;
 
     void deleteTask(int id);
 
-    List<Task> getAllTasks();
+    List<TaskDTO> getAllTasks();
 
     TaskDTO getTaskById(int id);
 

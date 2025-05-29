@@ -2,6 +2,7 @@ package com.marin.TaskManagement.task.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.marin.TaskManagement.common.dto.TaskDTO;
+import com.marin.TaskManagement.common.dto.TaskInfoDTO;
 import com.marin.TaskManagement.common.dto.TaskRegisterDTO;
 import com.marin.TaskManagement.common.entity.Task;
 import com.marin.TaskManagement.common.exception.NoTaskFoundException;
@@ -24,24 +25,24 @@ public class TaskController {
 
     @PostMapping
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<Task> createTask(@RequestBody TaskRegisterDTO taskRegisterDTO) throws Exception {
-        Task task = taskService.createTask(taskRegisterDTO);
+    public ResponseEntity<TaskInfoDTO> createTask(@RequestBody TaskRegisterDTO taskRegisterDTO) throws Exception {
+        TaskInfoDTO task = taskService.createTask(taskRegisterDTO);
 
         return ResponseEntity.ok(task);
     }
 
     @GetMapping
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<List<Task>> getTasksUser(){
-        List<Task> userTasks = taskService.getAuthUserTasks();
+    public ResponseEntity<List<TaskInfoDTO>> getTasksUser(){
+        List<TaskInfoDTO> userTasks = taskService.getAuthUserTasks();
 
         return ResponseEntity.ok(userTasks);
     }
 
     @PutMapping("/{taskId}")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<Task> updateTask(@PathVariable int taskId , @RequestBody TaskRegisterDTO taskRegisterDTO) throws NoTaskFoundException {
-        Task updatedTask = taskService.updateTask(taskId , taskRegisterDTO);
+    public ResponseEntity<TaskInfoDTO> updateTask(@PathVariable int taskId , @RequestBody TaskRegisterDTO taskRegisterDTO) throws NoTaskFoundException {
+        TaskInfoDTO updatedTask = taskService.updateTask(taskId , taskRegisterDTO);
 
         return ResponseEntity.ok(updatedTask);
     }
@@ -57,8 +58,8 @@ public class TaskController {
 
     @GetMapping("/admin/list")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<List<Task>> showAllTasks(){
-        List<Task> tasks = taskService.getAllTasks();
+    public ResponseEntity<List<TaskDTO>> showAllTasks(){
+        List<TaskDTO> tasks = taskService.getAllTasks();
 
         return ResponseEntity.ok(tasks);
     }
