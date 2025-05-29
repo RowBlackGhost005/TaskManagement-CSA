@@ -1,5 +1,6 @@
 package com.marin.TaskManagement.task.repository;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.marin.TaskManagement.common.entity.Task;
 import org.springframework.data.jpa.repository.Query;
@@ -15,4 +16,8 @@ public interface TaskRepository extends JpaRepository<Task , Integer> {
 
     @Query("SELECT t FROM Task t WHERE t.id = :taskId AND t.user.id = :userId")
     Optional<Task> fetchTaskByIdUserId(@Param("taskId") int taskId , @Param("userId") int userId);
+
+    @EntityGraph(attributePaths = {"user"})
+    @Query("SELECT t FROM Task t WHERE t.id = :taskId")
+    Optional<Task> fetchTaskWithUser(@Param("taskId") int taskId);
 }

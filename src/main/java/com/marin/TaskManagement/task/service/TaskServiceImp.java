@@ -1,13 +1,16 @@
 package com.marin.TaskManagement.task.service;
 
 import com.marin.TaskManagement.auth.service.JwtService;
+import com.marin.TaskManagement.common.dto.TaskDTO;
 import com.marin.TaskManagement.common.dto.TaskRegisterDTO;
+import com.marin.TaskManagement.common.dto.UserDTO;
 import com.marin.TaskManagement.common.entity.Priority;
 import com.marin.TaskManagement.common.entity.Status;
 import com.marin.TaskManagement.common.entity.Task;
 import com.marin.TaskManagement.common.entity.User;
 import com.marin.TaskManagement.task.repository.TaskRepository;
 import jakarta.transaction.Transactional;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -93,6 +96,26 @@ public class TaskServiceImp implements TaskService{
 
         Task taskDB = taskRepository.fetchTaskByIdUserId(id, authUserId).orElseThrow();
 
+        taskRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Task> getAllTasks() {
+        return taskRepository.findAll();
+    }
+
+    @Override
+    public TaskDTO getTaskById(int id) {
+
+        Task task = taskRepository.fetchTaskWithUser(id).orElseThrow();
+
+        UserDTO userDTO = new UserDTO(task.getUser().getId() , task.getUser().getUsername());
+
+        return new TaskDTO(task.getId() , userDTO , task.getTitle() , task.getDescription() , task.getStatus() , task.getPriority() , task.getDueDate());
+    }
+
+    @Override
+    public void deleteTaskAdmin(int id) {
         taskRepository.deleteById(id);
     }
 }
