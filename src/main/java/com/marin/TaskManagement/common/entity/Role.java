@@ -1,4 +1,4 @@
-package com.marin.TaskManagement.entity;
+package com.marin.TaskManagement.common.entity;
 
 import jakarta.persistence.*;
 

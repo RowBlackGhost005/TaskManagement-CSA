@@ -1,8 +1,8 @@
-package com.marin.TaskManagement.service;
+package com.marin.TaskManagement.auth.service;
 
-import com.marin.TaskManagement.entity.Role;
-import com.marin.TaskManagement.entity.User;
-import com.marin.TaskManagement.repository.UserRepository;
+import com.marin.TaskManagement.common.entity.Role;
+import com.marin.TaskManagement.common.entity.User;
+import com.marin.TaskManagement.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

@@ -1,11 +1,12 @@
-package com.marin.TaskManagement.service;
+package com.marin.TaskManagement.user.service;
 
-import com.marin.TaskManagement.dto.UserAuthDTO;
-import com.marin.TaskManagement.entity.Role;
-import com.marin.TaskManagement.entity.User;
-import com.marin.TaskManagement.exception.NoUserFoundException;
-import com.marin.TaskManagement.repository.RoleRepository;
-import com.marin.TaskManagement.repository.UserRepository;
+import com.marin.TaskManagement.common.dto.UserAuthDTO;
+import com.marin.TaskManagement.common.dto.UserDTO;
+import com.marin.TaskManagement.common.entity.Role;
+import com.marin.TaskManagement.common.entity.User;
+import com.marin.TaskManagement.common.exception.NoUserFoundException;
+import com.marin.TaskManagement.user.repository.RoleRepository;
+import com.marin.TaskManagement.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -48,5 +49,10 @@ public class UserServiceImp implements UserService{
     @Override
     public User fetchUserByUsername(String username) throws NoUserFoundException {
         return userRepository.findByUsername(username).orElseThrow( () -> new NoUserFoundException("There is no user with such username"));
+    }
+
+    @Override
+    public UserDTO fetchUserById(int id) throws Exception {
+        return userRepository.findUserById(id).orElseThrow( () -> new Exception("Not found"));
     }
 }

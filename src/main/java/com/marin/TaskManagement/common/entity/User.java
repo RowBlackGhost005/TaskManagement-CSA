@@ -1,8 +1,9 @@
-package com.marin.TaskManagement.entity;
+package com.marin.TaskManagement.common.entity;
 
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -32,14 +33,18 @@ public class User {
     )
     private Set<Role> roles = new HashSet<>();
 
+    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL , orphanRemoval = true , fetch = FetchType.LAZY)
+    private List<Task> tasks;
+
     public User() {
     }
 
-    public User(int id, String username, String password, Set<Role> roles) {
+    public User(int id, String username, String password, Set<Role> roles, List<Task> tasks) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.roles = roles;
+        this.tasks = tasks;
     }
 
     public int getId() {
@@ -72,5 +77,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 }

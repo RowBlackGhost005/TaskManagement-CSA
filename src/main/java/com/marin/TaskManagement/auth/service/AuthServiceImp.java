@@ -1,10 +1,11 @@
-package com.marin.TaskManagement.service;
+package com.marin.TaskManagement.auth.service;
 
-import com.marin.TaskManagement.dto.LoginResponseDTO;
-import com.marin.TaskManagement.dto.UserAuthDTO;
-import com.marin.TaskManagement.entity.User;
-import com.marin.TaskManagement.exception.NoUserFoundException;
-import com.marin.TaskManagement.security.JwtUtil;
+import com.marin.TaskManagement.common.dto.LoginResponseDTO;
+import com.marin.TaskManagement.common.dto.UserAuthDTO;
+import com.marin.TaskManagement.common.entity.User;
+import com.marin.TaskManagement.common.exception.NoUserFoundException;
+import com.marin.TaskManagement.auth.security.JwtUtil;
+import com.marin.TaskManagement.user.service.UserService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;

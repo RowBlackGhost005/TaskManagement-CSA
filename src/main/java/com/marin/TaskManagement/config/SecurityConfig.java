@@ -1,8 +1,8 @@
 package com.marin.TaskManagement.config;
 
-import com.marin.TaskManagement.service.CustomUserDetailsService;
-import com.marin.TaskManagement.security.JwtAuthenticationFilter;
-import com.marin.TaskManagement.security.JwtUtil;
+import com.marin.TaskManagement.auth.service.CustomUserDetailsService;
+import com.marin.TaskManagement.auth.security.JwtAuthenticationFilter;
+import com.marin.TaskManagement.auth.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,6 +1,6 @@
-package com.marin.TaskManagement.security;
+package com.marin.TaskManagement.auth.security;
 
-import com.marin.TaskManagement.service.CustomUserDetailsService;
+import com.marin.TaskManagement.auth.service.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

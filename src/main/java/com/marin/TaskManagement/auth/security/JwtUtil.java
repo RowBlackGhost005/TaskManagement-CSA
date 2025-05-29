@@ -1,6 +1,6 @@
-package com.marin.TaskManagement.security;
+package com.marin.TaskManagement.auth.security;
 
-import com.marin.TaskManagement.entity.User;
+import com.marin.TaskManagement.common.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;

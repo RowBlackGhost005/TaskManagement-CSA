@@ -1,4 +1,4 @@
-package com.marin.TaskManagement.dto;
+package com.marin.TaskManagement.common.dto;
 
 /**
  * Data Transfer Object for Authentication Credentials
