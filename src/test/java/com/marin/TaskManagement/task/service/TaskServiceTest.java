@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-@Sql(scripts = "classpath:data-test.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(scripts = "classpath:data-test.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
 @SpringBootTest(properties = "spring.profiles.active=test")
 public class TaskServiceTest {
 
@@ -40,6 +40,7 @@ public class TaskServiceTest {
     private TaskServiceImp taskService;
 
     @Test
+    @Transactional
     public void testCreateTask_Success(){
         User user = new User();
         user.setId(1);
@@ -57,6 +58,7 @@ public class TaskServiceTest {
     }
 
     @Test
+    @Transactional
     public void testUpdateTask_Success() throws NoTaskFoundException {
         User user = new User();
         user.setId(1);

@@ -9,6 +9,7 @@ import com.marin.TaskManagement.common.exception.NoUserFoundException;
 import com.marin.TaskManagement.user.repository.RoleRepository;
 import com.marin.TaskManagement.user.repository.UserRepository;
 import com.marin.TaskManagement.common.entity.User;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -38,6 +39,7 @@ public class UserServiceTest {
     private UserServiceImp userService;
 
     @Test
+    @Transactional
     public void testRegisterUser_Success() throws NoRoleFoundException {
         //Arrange role fetching inside registerUser()
         Role mockRole = new Role(1 , "USER");

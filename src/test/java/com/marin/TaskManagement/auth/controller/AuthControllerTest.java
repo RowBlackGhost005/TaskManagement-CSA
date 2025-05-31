@@ -1,6 +1,7 @@
 package com.marin.TaskManagement.auth.controller;
 
 import com.marin.TaskManagement.common.entity.User;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -24,12 +25,13 @@ public class AuthControllerTest {
     private MockMvc mockMvc;
 
     @Test
+    @Transactional
     public void testRegister_Post() throws Exception {
         User user = new User(1 , "New User" , "passwordencrypted" , null , null);
 
         //when(userService.registerUser(any())).thenReturn(user);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/auth/register")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"username\":\"New User\" , \"password\":\"password\"}"))
                 .andExpect(status().isOk())
@@ -39,7 +41,7 @@ public class AuthControllerTest {
     @Test
     public void testLogin_Post() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/auth/login")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"username\":\"admin\" , \"password\":\"password\"}"))
                 .andExpect(status().isOk())
