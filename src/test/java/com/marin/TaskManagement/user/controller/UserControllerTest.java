@@ -1,5 +1,6 @@
 package com.marin.TaskManagement.user.controller;
 
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -14,7 +15,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Sql(scripts = "classpath:data-test.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
 @SpringBootTest(properties = "spring.profiles.active=test")
 @AutoConfigureMockMvc
 public class UserControllerTest {
@@ -24,9 +24,10 @@ public class UserControllerTest {
 
     @Test
     @WithMockUser(username = "admin", roles = {"ADMIN"})
+    @Transactional
     public void testFetchUserTaskCount_Success() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/users/admin/taskCount"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/users/admin/taskCount"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].username").exists());

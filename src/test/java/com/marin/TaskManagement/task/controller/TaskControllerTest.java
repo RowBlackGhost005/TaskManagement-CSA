@@ -105,7 +105,7 @@ public class TaskControllerTest {
                 + "}";
 
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/tasks")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/tasks")
                         .header("Authorization" , "Bearer " + JWT)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonPayload))
@@ -119,7 +119,7 @@ public class TaskControllerTest {
     @Transactional
     public void testGetAuthUserTasks_Success() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/tasks")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/tasks")
                         .header("Authorization" , "Bearer " + JWT))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -134,7 +134,7 @@ public class TaskControllerTest {
                 + "\"status\":\"COMPLETED\""
                 + "}";
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/tasks/" + adminTask.getId())
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/tasks/" + adminTask.getId())
                         .header("Authorization" , "Bearer " + JWT)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonPayload))
@@ -148,7 +148,7 @@ public class TaskControllerTest {
     @WithMockUser(username = "testAdmin", roles = {"ADMIN"})
     @Transactional
     public void testDeleteTask_Response() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/tasks/" + adminTask.getId())
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/tasks/" + adminTask.getId())
                         .header("Authorization" , "Bearer " + JWT))
                 .andDo(print())
                 .andExpect(status().isOk());
@@ -158,7 +158,7 @@ public class TaskControllerTest {
     @WithMockUser(username = "testAdmin", roles = {"ADMIN"})
     @Transactional
     public void testDeleteTask_NotOwningTask() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/tasks/" + 3)
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/tasks/" + 3)
                         .header("Authorization" , "Bearer " + JWT))
                 .andDo(print())
                 .andExpect(status().isNotFound());
@@ -169,7 +169,7 @@ public class TaskControllerTest {
     @WithMockUser(username = "testAdmin", roles = {"ADMIN"})
     @Transactional
     public void testGetTaskByIdAdmin_Success() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/tasks/admin/task/" + 3)
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/tasks/admin/task/" + 3)
                         .header("Authorization" , "Bearer " + JWT))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -181,7 +181,7 @@ public class TaskControllerTest {
     @WithMockUser(username = "testAdmin", roles = {"ADMIN"})
     @Transactional
     public void testDeleteTaskByAdmin_Successs() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/tasks/admin/task/" + 3)
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/tasks/admin/task/" + 3)
                         .header("Authorization" , "Bearer " + JWT))
                 .andDo(print())
                 .andExpect(status().isOk());

@@ -2,6 +2,7 @@ package com.marin.TaskManagement.user.repository;
 
 import com.marin.TaskManagement.common.dto.UserTaskCountDTO;
 import com.marin.TaskManagement.common.entity.User;
+import jakarta.transaction.Transactional;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,11 @@ public class UserRepositoryTest {
     private UserRepository userRepository;
 
     @Test
+    @Transactional
     public void userRepository_Save_ReturnSavedUser(){
         //Arrange
         User user = new User ();
-        user.setUsername("Admin");
+        user.setUsername("NewAdmin");
         user.setPassword("pssword");
         user.setRoles(new HashSet<>());
         user.setTasks(new ArrayList<>());
@@ -37,6 +39,7 @@ public class UserRepositoryTest {
     }
 
     @Test
+    @Transactional
     public void testFetchUsersTaskCount_Success(){
         List<UserTaskCountDTO> userTaskCount = userRepository.fetchUsersTaskCount().orElseThrow();
 

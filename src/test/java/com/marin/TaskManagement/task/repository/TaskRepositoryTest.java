@@ -2,17 +2,14 @@ package com.marin.TaskManagement.task.repository;
 
 import com.marin.TaskManagement.common.dto.TaskDTO;
 import com.marin.TaskManagement.common.dto.TaskInfoDTO;
-import com.marin.TaskManagement.common.dto.UserTaskCountDTO;
 import com.marin.TaskManagement.common.entity.Task;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
-@Sql(scripts = "classpath:data-test.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
 @SpringBootTest(properties = "spring.profiles.active=test")
 public class TaskRepositoryTest {
 
