@@ -14,6 +14,7 @@ A small Restful API for Task Management that allows you to manage Tasks of multi
 - Role based authorization.
 - Admin only endpoints for management.
 - Logging API requests and errors into a file.
+- Unitary and Integration test for verification.
 - Single monolithic app divided in logical packages.
 
 # HOW TO RUN
