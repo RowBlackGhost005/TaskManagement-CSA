@@ -3,6 +3,8 @@
 
 A small Restful API for Task Management that allows you to manage Tasks of multiple Users.
 
+CHECK THE VIDEO DEMO: https://youtu.be/IDlau5GxE_c
+
 ## Technologies
 - Java 21
 - Spring Boot 3.5
