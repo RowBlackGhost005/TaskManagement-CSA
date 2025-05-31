@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.marin.TaskManagement.common.dto.TaskDTO;
 import com.marin.TaskManagement.common.dto.TaskInfoDTO;
 import com.marin.TaskManagement.common.dto.TaskRegisterDTO;
-import com.marin.TaskManagement.common.entity.Task;
 import com.marin.TaskManagement.common.exception.NoTaskFoundException;
 import com.marin.TaskManagement.task.service.TaskService;
 import org.springframework.http.ResponseEntity;
