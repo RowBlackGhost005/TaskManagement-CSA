@@ -234,10 +234,8 @@ PUT http://localhost:8080/api/tasks/{taskId}
 
 Response: Message (Text)
 ```
-Task deleted
+Task deleted successfully
 ```
-
-
 
 ---
 
