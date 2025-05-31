@@ -25,6 +25,8 @@ You can use GIT or download it as a ZIP in the *`<>Code`* button
 git clone https://github.com/RowBlackGhost005/TaskManagement-CSA.git
 ```
 
+---
+
 **2. Setup your enviroment variables**
 
 Create the JWT Secret Key for signing tokens, you can declare it in two ways:
@@ -42,6 +44,8 @@ set USERSERVICE_JWT_SECRET=YourSecretCustomJWTKey
 jwt.secret=ThisIsAHardcodedJwtSecretKey
 ```
 
+---
+
 **3. Setup the Databases in MySQL**
 
 Open MySQL Workbench or CLI to create the databases (Tables are automatically generated)
@@ -49,6 +53,8 @@ Open MySQL Workbench or CLI to create the databases (Tables are automatically ge
 CREATE DATABASE TaskManagementCSA;
 ```
 *Note: You *can* name your own databases name but you will be required to change the reference in the application.properties file*
+
+---
 
 **4. Execute the app**
 
@@ -59,6 +65,7 @@ Wait for the API to go up and once is done you it will be deployed in the 8080 p
 http://localhost:8080
 ```
 
+---
 
 # API Reference
 
@@ -72,7 +79,7 @@ http://localhost:8080/swagger-ui/index.html
 #### Register
 
 ```http
-    POST http://localhost:8080/api/auth/register
+POST http://localhost:8080/api/auth/register
 ```
 
 | Parameter | Type     | Description                |
@@ -81,7 +88,7 @@ http://localhost:8080/swagger-ui/index.html
 
 Response: (String)
 ```JSON
-    User registered sucessfully
+User registered sucessfully
 ```
 
 ---
@@ -89,7 +96,7 @@ Response: (String)
 #### Login
 
 ```http
-    POST http://localhost:8080/api/auth/login
+POST http://localhost:8080/api/auth/login
 ```
 
 | Parameter | Type     | Description                | Response                |
@@ -103,6 +110,7 @@ Response: Authentication Response (JWT Token)
     "tokenType": "Bearer"
 }
 ```
+
 ---
 
 ### Tasks
@@ -110,7 +118,7 @@ Response: Authentication Response (JWT Token)
 #### Create Task
 
 ```http
-    POST http://localhost:8080/api/tasks
+POST http://localhost:8080/api/tasks
 ```
 
 | Parameter | Type     | Description                |
@@ -141,11 +149,13 @@ Response: Task created (JSON Object)
 }
 ```
 
+---
+
 #### Fetch User Tasks
 
 Returns the current authenticated user (Defined by the JWT) tasks.
 ```http
-    GET http://localhost:8080/api/tasks
+GET http://localhost:8080/api/tasks
 ```
 
 | Parameter | Type     | Description                |
@@ -174,11 +184,13 @@ Response: Task created by the user (JSON Array)
 ]
 ```
 
+---
+
 #### Update Task
 
 Updates only the data sent if there is an ID match
 ```http
-    PUT http://localhost:8080/api/tasks/{taskId}
+PUT http://localhost:8080/api/tasks/{taskId}
 ```
 
 | Parameter | Type     | Description                |
@@ -205,11 +217,13 @@ Response: Task created (JSON Object)
 }
 ```
 
+---
+
 #### Delete Task
 
 Deletes the task that matches the given ID only if the current authenticated user owns the Task.
 ```http
-    PUT http://localhost:8080/api/tasks/{taskId}
+PUT http://localhost:8080/api/tasks/{taskId}
 ```
 
 | Parameter | Type     | Description                |
@@ -221,9 +235,11 @@ Deletes the task that matches the given ID only if the current authenticated use
 Response: Message (Text)
 ```TEXT
 {
-    Task deleted
+Task deleted
 }
 ```
+
+---
 
 ### ADMIN ONLY endpoints
 There are several endpoints only for admins, this repo provides only one Admin pre-persisted at first run that is used for generating the ADMIN Token to access this endpoints.
@@ -232,7 +248,7 @@ There are several endpoints only for admins, this repo provides only one Admin p
 
 Shows all tasks alongside its owner User
 ```http
-    GET http://localhost:8080/api/tasks/admin/list
+GET http://localhost:8080/api/tasks/admin/list
 ```
 
 | Parameter | Type     | Description                |
@@ -282,11 +298,13 @@ Response: All tasks registered (JSON Array)
 ]
 ```
 
+---
+
 #### Fetch task by Id
 
 Attemps to fetch a Task that has the given ID
 ```http
-    GET http://localhost:8080/api/tasks/admin/task/{taskId}
+GET http://localhost:8080/api/tasks/admin/task/{taskId}
 ```
 
 | Parameter | Type     | Description                |
@@ -311,11 +329,13 @@ Response: Task (JSON Object)
 }
 ```
 
+---
+
 #### Delete task
 
 Deletes ANY task with matching ID no matter ownership.
 ```http
-    DELETE http://localhost:8080/api/tasks/admin/task/{taskId}
+DELETE http://localhost:8080/api/tasks/admin/task/{taskId}
 ```
 
 | Parameter | Type     | Description                |
@@ -327,15 +347,17 @@ Deletes ANY task with matching ID no matter ownership.
 Response: Message (Text)
 ```TEXT
 {
-    Task deleted successfully
+Task deleted successfully
 }
 ```
+
+---
 
 #### Users task count
 
 Returns all Users with the task count they own.
 ```http
-    GET http://localhost:8080/api/users/admin/taskCount
+GET http://localhost:8080/api/users/admin/taskCount
 ```
 
 | Parameter | Type     | Description                |
@@ -358,7 +380,7 @@ Response: Users with Task Count (JSON Array)
     }
 ]
 ```
-
+---
 
 # Dependencies
 This project uses some dependencies to work properly and are listed below:
