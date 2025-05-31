@@ -233,11 +233,11 @@ PUT http://localhost:8080/api/tasks/{taskId}
 
 
 Response: Message (Text)
-```TEXT
-{
-Task deleted
-}
 ```
+Task deleted
+```
+
+
 
 ---
 
@@ -345,10 +345,8 @@ DELETE http://localhost:8080/api/tasks/admin/task/{taskId}
 
 
 Response: Message (Text)
-```TEXT
-{
+```
 Task deleted successfully
-}
 ```
 
 ---
