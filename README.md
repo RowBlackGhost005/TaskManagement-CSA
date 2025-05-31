@@ -87,7 +87,7 @@ POST http://localhost:8080/api/auth/register
 | `Credentials` | `JSON` | {"username":"John" , "password":"mypassword"} | 
 
 Response: (String)
-```JSON
+```
 User registered sucessfully
 ```
 
