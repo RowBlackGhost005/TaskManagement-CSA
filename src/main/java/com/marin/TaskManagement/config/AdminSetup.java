@@ -7,6 +7,7 @@ import com.marin.TaskManagement.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
  *
  * This component will execute only ONCE in the initial deployment of the app and its credentials should be changed
  */
+@Order(2)
 @Component
 public class AdminSetup implements CommandLineRunner {
 
